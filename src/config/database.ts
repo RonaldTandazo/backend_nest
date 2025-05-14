@@ -1,5 +1,4 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { FormEntity } from '../entities/form/form.entity';
 import { config } from 'dotenv';
 
 config();
@@ -11,6 +10,6 @@ export const databaseConfig: TypeOrmModuleOptions = {
     username: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
-    entities: [FormEntity],
+    entities: [__dirname + '/../entities/**/*.entity{.ts,.js}'],
     synchronize: process.env.NODE_ENV === 'development',
 };
