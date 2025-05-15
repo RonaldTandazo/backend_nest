@@ -3,5 +3,5 @@
 2. Levantar el proyecto con el comando: npm run start:dev
 
 Notas: 
-    - Si se requiere modificar el puerto donde se levanta el proyecto modificar la variable PORT del .env. Si este es el caso, asegurarse de modificar la URL del frontend de React
-    - Las credenciales utilizadas en el .env para la conexión a la DB corresponden a la plataforma Supabase, la cual proporciona servicios de DB PGSQL Online
+    -   Si se requiere modificar el puerto donde se levanta el proyecto modificar la variable PORT del .env. Si este es el caso, asegurarse de modificar la URL del frontend de React
+    -   Las credenciales utilizadas en el .env para la conexión a la DB corresponden a una DB personal en la plataforma Supabase, la cual proporciona servicios de DB PGSQL Online
