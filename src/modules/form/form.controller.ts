@@ -2,11 +2,11 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { FormService } from './form.service';
 import { FormDTO } from './store-form.dto';
 
-@Controller('form')
+@Controller('')
 export class FormController {
     constructor(private readonly formService: FormService) {}
 
-    @Get('options')
+    @Get('get-options')
     getOptions() {
         try {
             const data = this.formService.getOptions();
@@ -32,14 +32,10 @@ export class FormController {
     async store(@Body() data:FormDTO) {
         try {
             const verifyByName = await this.formService.verifyByName(data.name);
-            if(verifyByName.data){
-
-            }
+            if(!verifyByName.ok) throw verifyByName
 
             const verifyByEmail = await this.formService.verifyByEmail(data.email);
-            if(verifyByEmail.ok){
-                
-            }
+            if(!verifyByEmail.ok) throw verifyByEmail
 
             const store = await this.formService.store(data);
             if(!store.ok) throw store;

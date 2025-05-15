@@ -12,7 +12,7 @@ export class FormService {
     ){}
 
     getOptions(){
-        const options = ['Agent', 'Main Corp', 'Option 3'];
+        const options = ['Agent', 'Main Corp', 'Accounting'];
 
         try {
             return success("Options Obtained", options, HttpStatus.OK);
@@ -24,8 +24,11 @@ export class FormService {
     async verifyByEmail(email: string) {
         try {
             const existingRecord = await this.formRepository.findOne({ where: { email } });
+            if(existingRecord) {
+                return error('Email already in use', null, HttpStatus.BAD_REQUEST)
+            }
 
-            return success("Verification Completed", existingRecord, HttpStatus.OK);
+            return success("Email not used", existingRecord, HttpStatus.OK);
         } catch (e) {
             return error(e.message || "Error While Veryfing", e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -34,8 +37,11 @@ export class FormService {
     async verifyByName(name: string) {
         try {
             const existingRecord = await this.formRepository.findOne({ where: { name } });
+            if(existingRecord) {
+                return error('Name already in use', null, HttpStatus.BAD_REQUEST)
+            }
 
-            return success("Verification Completed", existingRecord, HttpStatus.CREATED);
+            return success("Name not used", existingRecord, HttpStatus.CREATED);
         } catch (e) {
             return error(e.message || "Error While Veryfing", e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
